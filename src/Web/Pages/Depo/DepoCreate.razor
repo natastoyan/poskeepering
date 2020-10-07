@@ -1,0 +1,245 @@
+﻿@page "/create-depo"
+@inject ApplicationCore.Interfaces.IDepoService depoService
+@inject ApplicationCore.Interfaces.ICurrencyService currencyService
+@namespace Web.Pages.DepoList
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">MM Deal Create</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row border rounded">
+                    <div class="col">
+                        <label for="murexId" class="control-label">Murex Id</label>
+                        <input id="murexId" name="murexId" style="min-width:150px" /><br />
+                    </div>
+                    <div class="col">
+                        <label for="murexOrId" class="control-label">Murex Original Id</label>
+                        <input id="murexOrId" name="murexOrId" style="min-width:150px" /><br />
+                    </div>
+                </div>
+                <div class="row border rounded">
+
+                    <div class="col col">
+                        <!--Reference-->
+                        <label for="reference" class="control-label">Reference</label>
+                        <input id="reference" name="reference" style="min-width:150px" /><br />
+                        <!--Deal Ticket-->
+                        <label for="dealTicket" class="control-label">Deal Ticket</label>
+                        <input id="dealTicket" name="dealTicket" style="min-width:150px" /><br />
+                    </div>
+                    <div class="col col">
+                        <!--Reg. Date-->
+                        <label for="regDate" class="control-label" disabled>Reg. Date</label>
+                        <input id="regDate" type="date" name="regDate" style="min-width:150px" /><br />
+                        <!--Deal Date-->
+                        <label for="dealDate" class="control-label">Deal Date</label>
+                        <input id="dealDate" type="date" name="dealDate" style="min-width:150px" /><br />
+                    </div>
+
+                    <div class="col  border rounded">
+                        <!--Start Date-->
+                        <label for="startDate" class="control-label" disabled>Start Date</label>
+                        <input id="startDate" type="date" name="startDate" style="min-width:150px" /><br />
+                        <!--On Call-->
+                        <label for="oncall" class="control-label">On Call</label>
+                        <input id="oncall" type="checkbox" name="oncall" /><br />
+                        <!--Marturity Date-->
+                        <label for="martDate" class="control-label">Marturity Date</label>
+                        <input id="martDate" type="date" name="martDate" style="min-width:150px" /><br />
+                    </div>
+
+                </div>
+                <div class="row border rounded">
+                    <div class="col">
+                        <!--Counterparty-->
+                        <label for="counterparty" class="control-label">Counterparty</label>
+                        <input id="counterparty" name="counterparty" style="min-width:150px" /><br />
+                        <!--Client-->
+                        <label for="client" class="control-label">Client </label>
+                        <input id="client" name="client" style="min-width:150px" /><br />
+                    </div>
+                    <div class="col">
+                        <!--Counterparty NAME-->
+                        <label for="field1" class="control-label"></label>
+                        <input id="field1" name="field1" style="min-width:150px" /><br />
+                        <!--Clinet NAME -->
+                        <label for="field2" class="control-label"></label>
+                        <input id="field2" name="field2" style="min-width:150px" /><br />
+                    </div>
+                    <div class="col">
+                        <!--Settlement-->
+                        <label for="settlement" class="control-label">Settlement</label>
+                        <input id="settlement" name="settlement" style="min-width:150px" /><br />
+                        <!--Vescel-->
+                        <label for="vescel" class="control-label">Vescel</label>
+                        <input id="vescel" type="checkbox" name="vescel" />
+                        <!--R/O-->
+                        <label for="ro" class="control-label">R/O</label>
+                        <input id="ro" type="checkbox" name="ro" /><br />
+                    </div>
+
+                </div>
+                <div class="row border rounded">
+                    <div class="col">
+                        <div>
+                            <!--Take Give-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+                                <label class="custom-control-label" for="defaultInline1">Take</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+                                <label class="custom-control-label" for="defaultInline2">Give</label>
+                            </div>
+                            <!--Currency-->
+
+                            <div class="input-group"  >
+                                <select class="custom-select" id="inputGroupSelect01" style="min-width:50px">
+                                    <option value="@defaultCurrency.Id">@defaultCurrency.Id</option>
+                                    @if (currencies != null)
+                                    {
+                                        @foreach (var currency in currencies)
+                                        {
+                                            <option value="@currency.Id">@currency.Id</option>
+
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <!--Base-->
+                        <label for="base" class="control-label">Base</label>
+                        <input id="base" name="base" /><br />
+                        <!--Interest-->
+                        <label for="interest" class="control-label">Interest</label>
+                        <input id="interes" name="interest" /><br />
+                    </div>
+                    <div class="col">
+                        <!--Sum 1-->
+                        <label for="sum1" class="control-label">Sum 1</label>
+                        <input id="sum1" name="sum1" /><br />
+                        <!--Rate-->
+                        <label for="rate" class="control-label">Rate</label>
+                        <input id="rate" name="rate" /><br />
+                        <!--Sum 2-->
+                        <label for="sum2" class="control-label">Sum 2</label>
+                        <input id="sum2" name="sum2" /><br />
+                    </div>
+                    <div class="col border">
+                        <!--Market Price-->
+                        <label for="marketParket" class="control-label">Market Price</label>
+                        <input id="marketParket" name="marketParket" /><br />
+                        <!--Rate w/o FXcom-->
+                        <label for="ratewoFXcom" class="control-label">Rate w/o FXcom</label>
+                        <input id="ratewoFXcom" name="ratewoFXcom" /><br />
+                        <!--Comment-->
+                        <label for="comment" class="control-label">Comment</label>
+                        <input id="comment" name="comment" /><br />
+                        <!--Sales Profit-->
+                        <label for="salesProfit" class="control-label">Sales Profit</label>
+                        <input id="salesProfit" name="salesProfit" /><br />
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!--Dealer-->
+                        <label for="dealer" class="control-label">Dealer</label>
+                        <input id="dealer" name="dealer" /><br />
+                        <!--P&L(%)-->
+                        <label for="pl" class="control-label">P&L(%)</label>
+                        <input id="pl" name="pl" /><br />
+                        <!--Broker-->
+                        <label for="broker" class="control-label">Broker</label>
+                        <input id="broker" name="broker" /><br />
+                    </div>
+                    <div class="col">
+                        <!--Sales Person-->
+                        <label for="salesperson" class="control-label">Sales Person</label>
+                        <input id="salesperson" name="salesperson" /><br />
+                        <!--Netting-->
+                        <label for="netting" class="control-label">Netting</label>
+                        <input id="netting" type="checkbox" name="netting" />
+                        <!--Internal-->
+                        <label for="internal" class="control-label">Internal</label>
+                        <input id="internal" type="checkbox" name="internal" /><br />
+                        <!--Struct. Product-->
+                        <label for="structproduct" class="control-label">Struct. Product</label>
+                        <input id="structproduct" type="checkbox" name="structproduct" /><br />
+                        <!--Trading Venue-->
+                        <label for="tradingvenue" class="control-label">Trading Venue</label>
+                        <input id="tradingvenue" name="tradingvenue" /><br />
+                    </div>
+                    <div class="col">
+                        <!--Book-->
+                        <label for="book" class="control-label">Book</label>
+                        <input id="book" name="book" /><br />
+                        <!--Collateral-->
+                        <label for="collateral" class="control-label">Collateral</label>
+                        <input id="collateral" type="checkbox" name="collateral" /><br />
+                        <!--Keep RUB Paym.-->
+                        <label for="keeprubpaym" class="control-label">Keep RUB Paym.</label>
+                        <input id="keeprubpaym" type="checkbox" name="keeprubpaym" /><br />
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    public Depo newDepo = new Depo();
+    public List<Currency> currencies;
+    public Currency defaultCurrency;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        currencies = await currencyService.ListAllAsync();
+        currencies = (List<Currency>)currencies.OrderBy(c => c.Iorder);
+        defaultCurrency = await currencyService.GetByIdAsync("RUB");
+    }
+
+    public async Task Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}

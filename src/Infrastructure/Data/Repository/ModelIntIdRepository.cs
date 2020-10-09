@@ -18,7 +18,7 @@ namespace Infrastructure.Data.Repository
 		{
 			_dbContext = dbContext;
 		}
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(decimal id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }

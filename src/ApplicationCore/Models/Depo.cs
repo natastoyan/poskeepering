@@ -5,7 +5,7 @@ namespace ApplicationCore.Models
 {
     public partial class Depo : BaseIntIdModel
     {
-        public decimal Id { get; set; }
+      //  public decimal Id { get; set; }
         public string Copcode { get; set; }
         public decimal? Nlogreckey { get; set; }
         public decimal? Nsourcekey { get; set; }

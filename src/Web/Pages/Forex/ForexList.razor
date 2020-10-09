@@ -18,9 +18,9 @@
                         <th scope="col">Deal Date</th>
                         <th scope="col">Value Date</th>
                         <th scope="col">Counterparty</th>
-                        @*<th scope="col">SWAP</th>
+                        <th scope="col">SWAP</th>
                         <th scope="col">Buy</th>
-                        <th scope="col">Bought Sum</th>
+                       @* <th scope="col">Bought Sum</th>
                         <th scope="col">Rate</th>*@
                     </tr>
                 </thead>
@@ -35,6 +35,8 @@
                             <td> @item.Dcontrdate</td>
                             <td> @item.Dvaluedateb </td>
                             <td> @item.Ccontrcode</td>
+                            <td> @item.Bswap</td>
+                            <td>@item.Nsumb</td>
                         </tr>
                     </tbody>
                 }

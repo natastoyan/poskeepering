@@ -8,7 +8,7 @@ namespace ApplicationCore.Interfaces
 {
 	public interface IAsyncIntIdRepository<T> where T : BaseIntIdModel
 	{
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(decimal id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
         Task<T> AddAsync(T entity);

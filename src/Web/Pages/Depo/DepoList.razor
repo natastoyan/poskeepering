@@ -1,60 +1,38 @@
 ﻿@inject ApplicationCore.Interfaces.IDepoService depoService;
 @page "/depo"
 
+
 @namespace Web.Pages.DepoList
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h2 class="text-center">MM Deal List</h2>
+    
+            <h2>MM Deal List</h2>
+        
+                <RadzenGrid Style="width: 1080px" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            FilterMode="FilterMode.Advanced" AllowSorting="true"
+                            Data="@depoList" TItem="Depo" ColumnWidth="180px">
+                    <Columns>
+                        <RadzenGridColumn TItem="Depo" Property="Nmurexoid" Title="Murex Original Id" />
+                        <RadzenGridColumn TItem="Depo" Property="Id" Title="Deal Key" />
+                        <RadzenGridColumn TItem="Depo" Property="Cdealnumber" Title="Ref" />
+                        <RadzenGridColumn TItem="Depo" Property="Cticket" Title="Ticket" />
+                        <RadzenGridColumn TItem="Depo" Property="Dcontrdate" Title="Deal Date" />
+                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate" Title="Start Date" />
+                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate2" Title="Marturity Date" />
+                        <RadzenGridColumn TItem="Depo" Property="Ccontrcode" Title="Counterparty" />
+                        <RadzenGridColumn TItem="Depo" Property="Ccurrcode" Title="Currency" />
+                        <RadzenGridColumn TItem="Depo" Property="Nsum" Title="Sum" />
+                    </Columns>
+                </RadzenGrid>
 
-            <table class="table table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Murex Original Id</th>
-                        <th scope="col">Deal Key</th>
-                        <th scope="col">Ref</th>
-                        <th scope="col">Ticket</th>
-                        <th scope="col">Deal Date</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Marturity Date</th>
-                        <th scope="col">Counterparty</th>
-                        <th scope="col">Currency</th>
-                        @*<th scope="col">Taken</th>
-                            <th scope="col">Given</th>*@
-                        <th scope="col">Rate</th>
-                        <th scope="col">Sum</th>
-                    </tr>
-                </thead>
-                @foreach (var item in depoList)
-                {
-                    <tbody>
-                        <tr>
-                            <td> @(item.Nmurexoid.ToString() ?? "No Murex Id")</td>
-                            <td> @item.Id </td>
-                            <td> @item.Cdealnumber</td>
-                            <td> @item.Cticket</td>
-                            <td> @item.Dcontrdate.Value.ToString("d") </td>
-                            <td> @item.Dvaluedate.Value.ToString("d") </td>
-                            <td> @item.Dvaluedate2.Value.ToString("d") </td>
-                            <td> @item.Ccontrcode </td>
-                            <td> @item.Ccurrcode</td>
-                            @*<td> @item.</td>*@
-                            <td> @item.Nrate </td>
-                            <td> @item.Nsum</td>
-                        </tr>
-                    </tbody>
-                }
-            </table>
+          
             <Web.Pages.DepoList.DepoCreate @ref="CreateComponent"></Web.Pages.DepoList.DepoCreate>
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-success" @onclick="(() => CreateComponent.Open())" >Add New Depo</button>
+                    <button class="btn btn-success  mb-2" @onclick="(() => CreateComponent.Open())" >Add New Depo</button>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 @code {

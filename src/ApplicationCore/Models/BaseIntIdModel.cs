@@ -6,6 +6,6 @@ namespace ApplicationCore.Models
 {
 	public class BaseIntIdModel
 	{
-		public virtual int Id { get; protected set; }
+		public virtual decimal Id { get; protected set; }
 	}
 }

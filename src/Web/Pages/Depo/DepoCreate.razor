@@ -14,212 +14,328 @@
             </div>
             <div class="modal-body" style=" height: 80vh; overflow-y: auto;">
                 <div class="container">
-                    <div class="row border rounded">
+                <div class="row border rounded">
 
-                        <div class="col">
-                            <div class="form-group row m-2">
-                                <label for="murexId" class="col-sm-4">Murex Id</label>
-                                <div class="col-sm-8">
-                                    <input id="murexId" type="text" name="murexId" class="form-control" /><br />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group row m-2">
-                                <label for="murexOrId" class="col-sm-4">Murex Original Id</label>
-                                <div class="col-sm-8">
-                                    <input id="murexOrId" name="murexOrId" type="text" class="form-control" /><br />
-                                </div>
+                    <div class="col">
+                        <div class="form-group row m-2">
+                            <label for="murexId" class="col-sm-4">Murex Id</label>
+                            <div class="col-sm-8">
+                                <input id="murexId" type="text" name="murexId" class="form-control" />
                             </div>
                         </div>
                     </div>
-
-                    <div class="row border rounded">
-                        <div class="col ">
-                            <!--Reference-->
-                            <div class="form-group row m-2">
-                                <label for="reference" class="col-sm-4">Reference</label>
-                                <div class="col-sm-8">
-                                    <input id="reference" name="reference" type="text" class="form-control" />
-                                </div>
-                            </div>
-
-                            <!--Deal Ticket-->
-                            <label for="dealTicket" class="control-label">Deal Ticket</label>
-                            <input id="dealTicket" name="dealTicket" type="text" class="form-control" />
-                        </div><br />
-                        <div class="col col">
-                            <!--Reg. Date-->
-                            <label for="regDate" class="control-label" disabled>Reg. Date</label>
-                            <input id="regDate" type="date" name="regDate" class="form-control" /><br />
-                            <!--Deal Date-->
-                            <label for="dealDate" class="control-label">Deal Date</label>
-                            <input id="dealDate" type="date" name="dealDate" class="form-control" /><br />
-                        </div>
-
-                        <div class="col  border rounded">
-                            <!--Start Date-->
-                            <label for="startDate" class="control-label" disabled>Start Date</label>
-                            <input id="startDate" type="date" name="startDate" class="form-control" /><br />
-                            <!--On Call-->
-                            <div class="custom-control custom-checkbox">
-                                <label class="custom-control-label" for="oncall">On Call</label>
-                                <input type="checkbox" class="custom-control-input" id="oncall" name="oncall">
-                            </div>
-
-                            <!--Marturity Date-->
-                            <label for="martDate" class="control-label">Marturity Date</label>
-                            <input id="martDate" type="date" name="martDate" class="form-control" /><br />
-                        </div>
-
-                    </div>
-                    <div class="row border rounded">
-                        <div class="col">
-                            <!--Counterparty-->
-                            <label for="counterparty" class="control-label">Counterparty</label>
-                            <input id="counterparty" name="counterparty" type="text" class="form-control" /><br />
-                            <!--Client-->
-                            <label for="client" class="control-label">Client </label>
-                            <input id="client" name="client" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col">
-                            <!--Counterparty NAME-->
-                            <label for="field1" class="control-label"></label>
-                            <input id="field1" name="field1" type="text" class="form-control" /><br />
-                            <!--Clinet NAME -->
-                            <label for="field2" class="control-label"></label>
-                            <input id="field2" name="field2" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col">
-                            <!--Settlement-->
-                            <label for="settlement" class="control-label">Settlement</label>
-                            <input id="settlement" name="settlement" type="text" class="form-control" /><br />
-                            <!--Vescel-->
-                            <div class="custom-control custom-checkbox  custom-control-inline">
-                                <label class="custom-control-label" for="vescel">Vescel</label>
-                                <input type="checkbox" class="custom-control-input" id="vescel" name="vescel">
-                            </div>
-
-                            <!--R/O-->
-                            <div class="custom-control custom-checkbox  custom-control-inline">
-                                <label for="ro" class="custom-control-label">R/O</label>
-                                <input id="ro" type="checkbox" class="custom-control-input" name="ro" />
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row border rounded">
-                        <div class="col">
-                            <div>
-                                <!--Take Give-->
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input modal-element" id="defaultInline1" name="inlineDefaultRadiosExample">
-                                    <label class="custom-control-label" for="defaultInline1">Take</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input modal-element" id="defaultInline2" name="inlineDefaultRadiosExample">
-                                    <label class="custom-control-label" for="defaultInline2">Give</label>
-                                </div>
-                                <!--Currency-->
-
-                                <div class="input-group  custom-control-inline" style="width:80px">
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                        <option value="@defaultCurrency.Id">@defaultCurrency.Id</option>
-                                        @if (currencies != null)
-                                        {
-                                            @foreach (var currency in currencies)
-                                            {
-                                                <option value="@currency.Id">@currency.Id</option>
-
-                                            }
-                                        }
-
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Base-->
-                            <label for="base" class="control-label">Base</label>
-                            <input id="base" name="base" type="text" class="form-control" /><br />
-                            <!--Interest-->
-                            <label for="interest" class="control-label">Interest</label>
-                            <input id="interes" name="interest" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col">
-                            <!--Sum 1-->
-                            <label for="sum1" class="control-label">Sum 1</label>
-                            <input id="sum1" name="sum1" type="text" class="form-control" /><br />
-                            <!--Rate-->
-                            <label for="rate" class="control-label">Rate</label>
-                            <input id="rate" name="rate" type="text" class="form-control" /><br />
-                            <!--Sum 2-->
-                            <label for="sum2" class="control-label">Sum 2</label>
-                            <input id="sum2" name="sum2" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col border">
-                            <!--Market Price-->
-                            <label for="marketParket" class="control-label">Market Price</label>
-                            <input id="marketParket" name="marketParket" type="text" class="form-control" /><br />
-                            <!--Rate w/o FXcom-->
-                            <label for="ratewoFXcom" class="control-label">Rate w/o FXcom</label>
-                            <input id="ratewoFXcom" name="ratewoFXcom" type="text" class="form-control" /><br />
-                            <!--Comment-->
-                            <label for="comment" class="control-label">Comment</label>
-                            <input id="comment" name="comment" type="text" class="form-control" /><br />
-                            <!--Sales Profit-->
-                            <label for="salesProfit" class="control-label">Sales Profit</label>
-                            <input id="salesProfit" name="salesProfit" type="text" class="form-control" /><br />
-
+                    <div class="col">
+                        <div class="form-group row m-2">
+                            <label for="murexOrId" class="col-sm-4">Murex Original Id</label>
+                            <div class="col-sm-8">   
+                                <input id="murexOrId" name="murexOrId" type="text" class="form-control" />
+                            </div>      
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <!--Dealer-->
-                            <label for="dealer" class="control-label">Dealer</label>
-                            <input id="dealer" name="dealer" type="text" class="form-control" /><br />
-                            <!--P&L(%)-->
-                            <label for="pl" class="control-label">P&L(%)</label>
-                            <input id="pl" name="pl" type="text" class="form-control" /><br />
-                            <!--Broker-->
-                            <label for="broker" class="control-label">Broker</label>
-                            <input id="broker" name="broker" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col">
-                            <!--Sales Person-->
-                            <label for="salesperson" class="control-label">Sales Person</label>
-                            <input id="salesperson" name="salesperson" type="text" class="form-control" /><br />
-                            <!--Netting-->
-                            <label for="netting" class="control-label">Netting</label>
-                            <input id="netting" type="checkbox" name="netting" />
-                            <!--Internal-->
-                            <label for="internal" class="control-label">Internal</label>
-                            <input id="internal" type="checkbox" name="internal" /><br />
-                            <!--Struct. Product-->
-                            <label for="structproduct" class="control-label">Struct. Product</label>
-                            <input id="structproduct" type="checkbox" name="structproduct" /><br />
-                            <!--Trading Venue-->
-                            <label for="tradingvenue" class="control-label">Trading Venue</label>
-                            <input id="tradingvenue" name="tradingvenue" type="text" class="form-control" /><br />
-                        </div>
-                        <div class="col">
-                            <!--Book-->
-                            <label for="book" class="control-label">Book</label>
-                            <input id="book" name="book" type="text" class="form-control" /><br />
-
-
-                            <!--Collateral-->
-                            <div class="custom-control custom-checkbox">
-                                <label for="collateral" class="custom-control-label">Collateral</label>
-                                <input id="collateral" type="checkbox" class="custom-control-input" name="collateral" />
-                            </div>
-                            <!--Keep RUB Paym.-->
-                            <div class="custom-control custom-checkbox">
-                                <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
-                                <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
+                <div class="row border rounded">
+                    <div class="col ">
+                        <!--Reference-->
+                        <div class="form-group row m-2">
+                            <label for="reference" class="col-sm-5">Reference</label>
+                            <div class="col-sm-7">
+                                <input id="reference" name="reference" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!--Deal Ticket-->
+                        <div class="form-group row m-2">
+                            <label for="dealTicket" class="col-sm-5">Deal Ticket</label>
+                            <div class="col-sm-7">
+                                <input id="dealTicket" name="dealTicket" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col ">
+                            <!--Reg. Date-->
+                            <div class="form-group row m-2">
+                                <label for="regDate" class="col-sm-5">Reg. Date</label>
+                                <div class="col-sm-7">
+                                    <input id="regDate" type="date" name="regDate" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <!--Deal Date-->
+                            <div class="form-group row m-2">
+                                <label for="dealDate" class="col-sm-5">Deal Date</label>
+                                <div class="col-sm-7">
+                                    <input id="dealDate" type="date" name="dealDate" class="form-control" />
+                                    </div>
+                                </div>
+                    </div>
+
+                     <div class="col  border rounded">
+                            <!--Start Date-->
+                            <div class="form-group row m-2">
+                                <label for="startDate" class="col-sm-5" disabled>Start Date</label>
+                                <div class="col-sm-7">
+                                    <input id="startDate" type="date" name="startDate" class="form-control" />
+                                </div>
+                            </div>
+                            <!--On Call-->
+                            <div class="form-group row m-2">
+                                <div class="col-sm-7">
+                                    <div class="custom-control custom-checkbox">
+                                        <label class="custom-control-label" for="oncall">On Call</label>
+                                        <input type="checkbox" class="custom-control-input" id="oncall" name="oncall">
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!--Marturity Date-->
+                                <div class="form-group row m-2">
+                                    <label for="martDate" class="col-sm-5">Marturity Date</label>
+                                    <div class="col-sm-7">
+                                        <input id="martDate" type="date" name="martDate" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+                <div class="row border rounded">
+                     <div class="col">
+                          <!--Counterparty-->
+                           <div class="form-group row m-2">
+                                <label for="counterparty" class="control-label col-sm-5">Counterparty</label>
+                                <div class="col-sm-7">
+                                     <input id="counterparty" name="counterparty" type="text" class="form-control" />
+                                </div>
+                           </div>
+                           <!--Client-->
+                           <div class="form-group row m-2">
+                                <label for="client" class="control-label col-sm-5">Client </label>
+                                <div class="col-sm-7">
+                                      <input id="client" name="client" type="text" class="form-control" />
+                                </div>
+                           </div>
+                     </div>
+                     <div class="col">
+                         <!--Counterparty NAME-->
+                         <div class="form-group row m-2">
+                             <label for="field1" class="control-label"></label>
+                             <input id="field1" name="field1" type="text" class="form-control" />
+                         </div>
+                         <!--Clinet NAME -->
+                         <div class="form-group row m-2">
+                             <label for="field2" class="control-label"></label>
+                             <input id="field2" name="field2" type="text" class="form-control" />
+                         </div>
+                     </div>
+                     <div class="col">
+                         <!--Settlement-->
+                         <div class="form-group row m-2"
+                             <label for="settlement" class="control-label col-sm-5">Settlement</label>
+                             <div class="col-sm-7">
+                                <input id="settlement" name="settlement" type="text" class="form-control" />
+                             </div>
+                         </div>
+                         <!--Vescel-->
+                         <div class="form-group row m-2"
+                              <div class="col-sm-7">
+                            <div class="custom-control custom-checkbox  custom-control-inline">
+                             <label class="custom-control-label col-sm-5" for="vescel">Vescel</label>
+                                 <input type="checkbox" class="custom-control-input" id="vescel" name="vescel">
+                                </div>
+    
+                             <!--R/O-->
+                     
+                             <div class="custom-control custom-checkbox  custom-control-inline">
+                                 <label for="ro" class="custom-control-label">R/O</label>
+                                 <input id="ro" type="checkbox" class="custom-control-input" name="ro" />
+                             </div>
+                             </div>
+                          </div>
+                         </div>
+                     </div>
+                        <div class="row border rounded">
+                            <div class="col">
+                                <!--Take Give-->
+                                <div class="form-group row m-2">
+                                 
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input modal-element" id="defaultInline1" name="inlineDefaultRadiosExample">
+                                            <label class="custom-control-label" for="defaultInline1">Take</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input modal-element" id="defaultInline2" name="inlineDefaultRadiosExample">
+                                            <label class="custom-control-label" for="defaultInline2">Give</label>
+                                        </div>
+                                        <!--Currency-->
+
+                                        <div class="input-group  custom-control-inline" style="width:80px">
+                                            <select class="custom-select" id="inputGroupSelect01">
+                                                <option value="@defaultCurrency.Id">@defaultCurrency.Id</option>
+                                                @if (currencies != null)
+                                                {
+                                                    @foreach (var currency in currencies)
+                                                    {
+                                                        <option value="@currency.Id">@currency.Id</option>
+
+                                                    }
+                                                }
+
+                                            </select>
+                                        </div>
+                                   
+                                </div>
+                                <!--Base-->
+                                <div class="form-group row m-2">
+                                    <label for="base" class="control-label col-sm-5">Base</label>
+                                    <div class="col-sm-7">
+                                        <input id="base" name="base" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Interest-->
+                                <div class="form-group row m-2">
+                                    <label for="interest" class="control-label  col-sm-5">Interest</label>
+                                    <div class="col-sm-7">
+                                        <input id="interes" name="interest" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col">
+                                <!--Sum 1-->
+                                <div class="form-group row m-2">
+                                    <label for="sum1" class="control-label col-sm-5">Sum</label>
+                                    <div class="col-sm-7">
+                                        <input id="sum1" name="sum1" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Rate-->
+                                <div class="form-group row m-2">
+                                    <label for="rate" class="control-label col-sm-5">Rate</label>
+                                    <div class="col-sm-7">
+                                        <input id="rate" name="rate" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Sum 2-->
+                                <div class="form-group row m-2">
+                                    <label for="sum2" class="control-label col-sm-5">Sum + Int</label>
+                                    <div class="col-sm-7">
+                                        <input id="sum2" name="sum2" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col border">
+                                <!--Market Price-->
+                                <div class="form-group row m-2">
+                                    <label for="marketprice" class="control-label col-sm-5">Market Price</label>
+                                    <div class="col-sm-7">
+                                        <input id="marketprice" name="marketprice" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Rate w/o FXcom-->
+                                <div class="form-group row m-2">
+                                    <label for="ratewofxcom" class="control-label col-sm-5">Rate w/o FXcom</label>
+                                    <div class="col-sm-7">
+                                        <input id="ratewofxcom" name="ratewofxcom" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Comment-->
+                                <div class="form-group row m-2">
+                                    <label for="comment" class="control-label col-sm-5">Comment</label>
+                                    <div class="col-sm-7">
+                                        <input id="comment" name="comment" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Sales Profit-->
+                                <div class="form-group row m-2">
+                                    <label for="salesProfit" class="control-label col-sm-5">Sales Profit</label>
+                                    <div class="col-sm-7">
+                                        <input id="salesProfit" name="salesProfit" type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col">
+                                <!--Dealer-->
+                                <div class="form-group row m-2">
+                                    <label for="dealer" class="control-label col-sm-5">Dealer</label>
+                                    <div class="col-sm-7">
+                                        <input id="dealer" name="dealer" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--P&L(%)-->
+                                <div class="form-group row m-2">
+                                    <label for="pl" class="control-label col-sm-5">P&L(%)</label>
+                                    <div class="col-sm-7">
+                                        <input id="pl" name="pl" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <!--Broker-->
+                                <div class="form-group row m-2">
+                                    <label for="broker" class="control-label col-sm-5">Broker</label>
+                                    <div class="col-sm-7">
+                                        <input id="broker" name="broker" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!--Sales Person-->
+                                <div class="form-group row m-2">
+                                    <label for="salesperson" class="control-label col-sm-5">Sales Person</label>
+                                    <div class="col-sm-7">
+                                        <input id="salesperson" name="salesperson" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-7">
+                                    <!--Netting-->
+                                    <div class="custom-control custom-checkbox  custom-control-inline">
+                                        <label class="custom-control-label col-sm-5" for="netting">Netting</label>
+                                        <input type="checkbox" class="custom-control-input" id="netting" name="netting">
+                                    </div>
+                                    <!--Internal-->
+                                    <div class="custom-control custom-checkbox  custom-control-inline">
+                                        <label for="internal" class="custom-control-label">Internal</label>
+                                        <input id="internal" type="checkbox" class="custom-control-input" name="internal" />
+                                    </div>
+                                    <!--Struct. Product-->
+                                    <div class="custom-control custom-checkbox  custom-control-inline">
+                                        <label for="structproduct" class="custom-control-label">Struct. Product</label>
+                                        <input id="structproduct" type="checkbox" class="custom-control-input" name="structproduct" />
+                                    </div>
+                                </div>
+
+                                <!--Trading Venue-->
+                                <div class="form-group row m-2">
+                                    <label for="tradingvenue" class="control-label col-sm-5">Trading Venue</label>
+                                    <div class="col-sm-7">
+                                        <input id="tradingvenue" name="tradingvenue" type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <!--Book-->
+                                <div class="form-group row m-2">
+                                    <label for="book" class="control-label col-sm-5">Book</label>
+                                    <div class="col-sm-7">
+                                        <input id="book" name="book" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <!--Collateral-->
+                                    <div class="custom-control custom-checkbox  custom-control-inline">
+                                        <label class="custom-control-label col-sm-5" for="collateral">Collateral</label>
+                                        <input type="checkbox" class="custom-control-input" id="collateral" name="collateral">
+                                    </div>
+                                    <!--Keep RUB Paym.-->
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
+                                        <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary">Save changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>

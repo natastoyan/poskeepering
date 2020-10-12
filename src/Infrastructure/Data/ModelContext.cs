@@ -10161,7 +10161,7 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Orgs>(entity =>
             {
-                entity.HasKey(e => e.Corgcode);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("ORGS");
 
@@ -10178,10 +10178,10 @@ namespace Infrastructure.Data
                 entity.HasIndex(e => e.Ngridid)
                     .HasName("IORGS_NGRIDID");
 
-                entity.HasIndex(e => new { e.Corgtypecode, e.Corgcode })
+                entity.HasIndex(e => new { e.Corgtypecode, e.Id })
                     .HasName("XIE1ORGS");
 
-                entity.Property(e => e.Corgcode)
+                entity.Property(e => e.Id)
                     .HasColumnName("CORGCODE")
                     .HasMaxLength(20)
                     .IsUnicode(false)
@@ -10484,9 +10484,9 @@ namespace Infrastructure.Data
                     .HasColumnType("NUMBER")
                     .HasDefaultValueSql("0");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                //entity.Property(e => e.Id)
+                //    .HasColumnName("ID")
+                //    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Inettingtype)
                     .HasColumnName("INETTINGTYPE")

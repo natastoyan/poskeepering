@@ -3,15 +3,16 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Orgs
-    {
+    public partial class Orgs: BaseStrIdModel
+	{
         public Orgs()
         {
             Books = new HashSet<Books>();
         }
 
-        public string Corgcode { get; set; }
-        public string Corgname { get; set; }
+		//   public string Corgcode { get; set; }
+		public string Id { get; set; }
+		public string Corgname { get; set; }
         public string Corgtypecode { get; set; }
         public string Crequisites { get; set; }
         public decimal? Npriority { get; set; }
@@ -82,7 +83,7 @@ namespace ApplicationCore.Models
         public string Сodd { get; set; }
         public string Сcpack { get; set; }
         public string Сcddstatus { get; set; }
-        public int? Id { get; set; }
+      //  public int? Id { get; set; }
 
         public virtual Orgstype CorgtypecodeNavigation { get; set; }
         public virtual ICollection<Books> Books { get; set; }

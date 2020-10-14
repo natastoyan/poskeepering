@@ -2,7 +2,7 @@
 
 namespace ApplicationCore.Interfaces
 {
-	interface IOrgRepository: IAsyncStrIdRepository<Orgs>
+	public interface IOrgsRepository: IAsyncStrIdRepository<Orgs>
 	{
 	}
 }

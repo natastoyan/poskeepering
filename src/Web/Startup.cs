@@ -42,6 +42,8 @@ namespace Web
 			services.AddScoped<IDepoService, DepoService>();
 			services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 			services.AddScoped<ICurrencyService, CurrencyService>();
+			services.AddScoped<IOrgsRepository, OrgsRepository>();
+			services.AddScoped<IOrgsService, OrgsService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

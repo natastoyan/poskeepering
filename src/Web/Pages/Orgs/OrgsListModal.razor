@@ -1,0 +1,67 @@
+﻿@inject ApplicationCore.Interfaces.IOrgsService orgsService
+@namespace Web.Pages.Orgs
+
+<div class="modal @ModalClass" tabindex="-1"  id="orgsShowModal"  role="dialog" style="display:@ModalDisplay"  data-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document" style=" overflow-y: initial !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Counterparty</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style=" height: 80vh; overflow-y: auto;">
+                <RadzenGrid Style="width: 1080px" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            FilterMode="FilterMode.Advanced" AllowSorting="true"
+                            Data="@orgs" TItem="Orgs" ColumnWidth="180px">
+                    <Columns>
+                        <RadzenGridColumn TItem="Orgs" Property="Id" Title="Org. Code" />
+                        <RadzenGridColumn TItem="Orgs" Property="Corgname" Title="Org. Name" />
+                        <RadzenGridColumn TItem="Orgs" Property="Corgtypecode" Title="Org. Type" />
+                        <RadzenGridColumn TItem="Orgs" Property="Csalescredit" Title="Sales Credit" />
+                        @*<RadzenGridColumn TItem="Orgs" Property="Nsalesmanagerid" Title="Sales Manager" />
+                        <RadzenGridColumn TItem="Orgs" Property="Id" Title="Micex ID" />
+                        <RadzenGridColumn TItem="Orgs" Property="Id" Title="Grid ID" />*@
+                    </Columns>
+                </RadzenGrid>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    private List<Orgs> orgs;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        orgs = await orgsService.ListAllAsync();
+
+    }
+
+    public async Task Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}

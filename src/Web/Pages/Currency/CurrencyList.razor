@@ -1,0 +1,32 @@
+﻿@page "/currencies"
+@inject ApplicationCore.Interfaces.ICurrencyService currencyService
+
+<h3>CurrencyList</h3>
+
+     <RadzenGrid  Style="width: 1300px" AllowFiltering="true" 
+                            AllowSorting="true"
+                            Data="@currencies" TItem="Currency">
+                    <Columns>
+                        <RadzenGridColumn TItem="Currency" Property="Id" Title="Currency Code"  Width="200"/>
+                        <RadzenGridColumn TItem="Currency" Property="Ccurrname" Title="Currency Name"  Width="200" />
+                        <RadzenGridColumn TItem="Currency" Property="Iorder" Title="Sort Order"  Width="100"/>
+                        <RadzenGridColumn TItem="Currency" Property="Beurgroup" Title="Euro Group" Width="130"/>
+                        <RadzenGridColumn TItem="Currency" Property="Neurrate" Title="Rate to Euro" Width="130"/>
+                        <RadzenGridColumn TItem="Currency" Property="Iocporder" Title="OCP Sort Order" Width="180"/>
+                        <RadzenGridColumn TItem="Currency" Property="Nisocode" Title="ISO Code" Width="110"/>
+                        <RadzenGridColumn TItem="Currency" Property="Nrecontype" Title="Sending Payments"  Width="230"/>
+
+                    </Columns>
+     </RadzenGrid>
+
+@code {
+    public List<Currency> currencies;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+       currencies = await currencyService.ListAllAsync();
+
+    }
+
+}

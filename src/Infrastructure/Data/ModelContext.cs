@@ -1480,12 +1480,12 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Books>(entity =>
             {
-                entity.HasKey(e => e.Cbookcode)
+                entity.HasKey(e => e.Id)
                     .HasName("SYS_C008078");
 
                 entity.ToTable("BOOKS");
 
-                entity.Property(e => e.Cbookcode)
+                entity.Property(e => e.Id)
                     .HasColumnName("CBOOKCODE")
                     .HasMaxLength(20)
                     .IsUnicode(false)

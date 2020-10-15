@@ -8,20 +8,31 @@
     
             <h2>MM Deal List</h2>
         
-                <RadzenGrid Style="width: 1080px" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                            FilterMode="FilterMode.Advanced" AllowSorting="true"
+                <RadzenGrid Style="width: 1640px" AllowFiltering="true"  AllowSorting="true"
                             Data="@depoList" TItem="Depo" ColumnWidth="180px">
                     <Columns>
                         <RadzenGridColumn TItem="Depo" Property="Nmurexoid" Title="Murex Original Id" />
-                        <RadzenGridColumn TItem="Depo" Property="Id" Title="Deal Key" />
+                        <RadzenGridColumn TItem="Depo" Property="Id" Title="Deal Key" Width="120" />
                         <RadzenGridColumn TItem="Depo" Property="Cdealnumber" Title="Ref" />
-                        <RadzenGridColumn TItem="Depo" Property="Cticket" Title="Ticket" />
-                        <RadzenGridColumn TItem="Depo" Property="Dcontrdate" Title="Deal Date" />
-                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate" Title="Start Date" />
-                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate2" Title="Marturity Date" />
+                        <RadzenGridColumn TItem="Depo" Property="Cticket" Title="Ticket" Width="100" />
+                        <RadzenGridColumn TItem="Depo" Property="Dcontrdate" Title="Deal Date" Width="150">
+                            <Template Context="data">
+                                @String.Format("{0:d}", data.Dcontrdate)
+                            </Template>
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate" Title="Start Date"  Width="150">
+                            <Template Context="data">
+                                @String.Format("{0:d}", data.Dvaluedate)
+                            </Template>
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="Depo" Property="Dvaluedate2" Title="Marturity Date"  Width="150">
+                            <Template Context="data">
+                                @String.Format("{0:d}", data.Dvaluedate2)
+                            </Template>
+                        </RadzenGridColumn>
                         <RadzenGridColumn TItem="Depo" Property="Ccontrcode" Title="Counterparty" />
-                        <RadzenGridColumn TItem="Depo" Property="Ccurrcode" Title="Currency" />
-                        <RadzenGridColumn TItem="Depo" Property="Nsum" Title="Sum" />
+                        <RadzenGridColumn TItem="Depo" Property="Ccurrcode" Title="Currency" Width="110" />
+                        <RadzenGridColumn TItem="Depo" Property="Nsum" Title="Sum" Width="100" />
                     </Columns>
                 </RadzenGrid>
 

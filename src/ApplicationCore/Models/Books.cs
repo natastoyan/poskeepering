@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Books
+    public partial class Books : BaseStrIdModel
     {
         public Books()
         {
@@ -17,7 +17,7 @@ namespace ApplicationCore.Models
             Trans = new HashSet<Trans>();
         }
 
-        public string Cbookcode { get; set; }
+        public string Id { get; set; }
         public string Cbookname { get; set; }
         public string Csummitbookcode { get; set; }
         public string Cdealercode { get; set; }

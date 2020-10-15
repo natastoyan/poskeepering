@@ -1,0 +1,32 @@
+﻿@page "/orgs"
+@inject ApplicationCore.Interfaces.IOrgsService orgsService
+@namespace Web.Pages.Orgs
+
+<h3>Organizations</h3>
+
+     <RadzenGrid  AllowFiltering="true"  AllowSorting="true" Data="@orgs" TItem="Orgs" ColumnWidth="180px">
+                    <Columns>
+                        <RadzenGridColumn TItem="Orgs" Property="Id" Title="Code" />
+                        <RadzenGridColumn TItem="Orgs" Property="Corgname" Title="Name" />
+                        <RadzenGridColumn TItem="Orgs" Property="Corgtypecode" Title="Type" />
+                        <RadzenGridColumn TItem="Orgs" Property="Creutercode" Title="Reuters Code" />
+                        <RadzenGridColumn TItem="Orgs" Property="Csummitcode" Title="Summit Code" />
+                        <RadzenGridColumn TItem="Orgs" Property="Crequisites" Title="Requisites" Width="250"/>
+                        <RadzenGridColumn TItem="Orgs" Property="Npriority" Title="Priority" />
+                        <RadzenGridColumn TItem="Orgs" Property="Csalescredit" Title="Sales Credit (MM)" />
+                        <RadzenGridColumn TItem="Orgs" Property="Bnetting" Title="Netting" />
+                        <RadzenGridColumn TItem="Orgs" Property="Bnotresident" Title="Not Resident" />
+                    </Columns>
+                </RadzenGrid>
+
+
+@code {
+  private List<Orgs> orgs;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        orgs = await orgsService.ListAllAsync();
+
+    }
+}

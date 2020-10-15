@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 using Web.Data;
 using Infrastructure.Data.Repository;
 using Infrastructure.Data;
@@ -33,7 +34,7 @@ namespace Web
 			services.AddDbContext<ModelContext>();
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
-			services.AddSingleton<WeatherForecastService>();
+			services.AddHeadElementHelper();
 			services.AddScoped(typeof(IAsyncIntIdRepository<>), typeof(ModelIntIdRepository<>));
 			services.AddScoped(typeof(IAsyncStrIdRepository<>), typeof(ModelStrIdRepository<>));
 		    services.AddScoped<IForexRepository, ForexRepository>();

@@ -17,7 +17,7 @@ namespace ApplicationCore.Models
             Trans = new HashSet<Trans>();
         }
 
-        public string Id { get; set; }
+      //  public string Id { get; set; }
         public string Cbookname { get; set; }
         public string Csummitbookcode { get; set; }
         public string Cdealercode { get; set; }

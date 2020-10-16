@@ -1621,7 +1621,7 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Brokers>(entity =>
             {
-                entity.HasKey(e => e.Nbrokerkey)
+                entity.HasKey(e => e.Id)
                     .HasName("SYS_C008081");
 
                 entity.ToTable("BROKERS");
@@ -1630,7 +1630,7 @@ namespace Infrastructure.Data
                     .HasName("U1_BROKERS")
                     .IsUnique();
 
-                entity.Property(e => e.Nbrokerkey)
+                entity.Property(e => e.Id)
                     .HasColumnName("NBROKERKEY")
                     .HasColumnType("NUMBER");
 
@@ -3089,7 +3089,7 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Dealers>(entity =>
             {
-                entity.HasKey(e => e.Cdealercode)
+                entity.HasKey(e => e.Id)
                     .HasName("SYS_C008176");
 
                 entity.ToTable("DEALERS");
@@ -3098,7 +3098,7 @@ namespace Infrastructure.Data
                     .HasName("I1_DEALERS")
                     .IsUnique();
 
-                entity.Property(e => e.Cdealercode)
+                entity.Property(e => e.Id)
                     .HasColumnName("CDEALERCODE")
                     .HasMaxLength(20)
                     .IsUnicode(false)

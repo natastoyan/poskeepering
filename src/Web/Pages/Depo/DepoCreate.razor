@@ -1,6 +1,9 @@
 ﻿@page "/create-depo"
 @inject ApplicationCore.Interfaces.IDepoService depoService
 @inject ApplicationCore.Interfaces.ICurrencyService currencyService
+@inject ApplicationCore.Interfaces.IBooksService booksService 
+@inject ApplicationCore.Interfaces.IBrokersService brokersService
+@inject ApplicationCore.Interfaces.IDealersService dealersService
 @namespace Web.Pages.DepoList
 
 <Web.Pages.Orgs.OrgsListModal @ref="@OrgsShow"></Web.Pages.Orgs.OrgsListModal>
@@ -183,6 +186,7 @@
                     <input type="radio" class="custom-control-input modal-element" id="defaultInline2" name="inlineDefaultRadiosExample">
                     <label class="custom-control-label" for="defaultInline2">Give</label>
                 </div>
+
                 <!--Currency-->
 
                 <div class="input-group  custom-control-inline" style="width:80px">
@@ -277,9 +281,20 @@
             <div class="form-group row m-2">
                 <label for="dealer" class="control-label col-sm-5">Dealer</label>
                 <div class="col-sm-7">
-                    <input id="dealer" name="dealer" type="text" class="form-control" />
+                    <div class="input-group">
+                        <select class="custom-select" id="dealer">
+                            @if (dealers != null)
+                            {
+                                @foreach (var dealer in dealers)
+                                {
+                                    <option value="@dealer.Id">@dealer.Cdealername</option>
+                                }
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
+
             <!--P&L(%)-->
             <div class="form-group row m-2">
                 <label for="pl" class="control-label col-sm-5">P&L(%)</label>
@@ -291,9 +306,26 @@
             <div class="form-group row m-2">
                 <label for="broker" class="control-label col-sm-5">Broker</label>
                 <div class="col-sm-7">
-                    <input id="broker" name="broker" type="text" class="form-control" />
+                    <div class="input-group">
+                        <select class="custom-select" id="broker">
+                            @if (brokers != null)
+                            {
+                                @foreach (var broker in brokers)
+                                {
+                                    <option value="@broker.Id">@broker.Cname</option>
+
+                                }
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
+            @*<div class="form-group row m-2">
+            <label for="broker" class="control-label col-sm-5">Broker</label>
+            <div class="col-sm-7">
+                <input id="broker" name="broker" type="text" class="form-control" />
+            </div>
+        </div>*@
         </div>
         <div class="col">
             <!--Sales Person-->
@@ -336,23 +368,34 @@
             <div class="form-group row m-2">
                 <label for="book" class="control-label col-sm-5">Book</label>
                 <div class="col-sm-7">
-                    <input id="book" name="book" type="text" class="form-control" />
+                    <div class="input-group">
+                        <select class="custom-select" id="book">
+                            @if (books != null)
+                            {
+                                @foreach (var book in books)
+                                {
+                                    <option value="@book.Id">@book.Id</option>
+                                }
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-7">
-                <!--Collateral-->
-                <div class="custom-control custom-checkbox  custom-control-inline">
-                    <label class="custom-control-label col-sm-5" for="collateral">Collateral</label>
-                    <input type="checkbox" class="custom-control-input" id="collateral" name="collateral">
-                </div>
-                <!--Keep RUB Paym.-->
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
-                    <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
+
+                <div class="col-sm-7">
+                    <!--Collateral-->
+                    <div class="custom-control custom-checkbox  custom-control-inline">
+                        <label class="custom-control-label col-sm-5" for="collateral">Collateral</label>
+                        <input type="checkbox" class="custom-control-input" id="collateral" name="collateral">
+                    </div>
+                    <!--Keep RUB Paym.-->
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
+                        <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <div class="row">
         <div class="col">
             <button type="button" class="btn btn-success mb-3">Save changes</button>
@@ -384,6 +427,9 @@
     public bool ShowBackdrop = false;
     public Depo newDepo = new Depo();
     public List<Currency> currencies;
+    public List<Books> books;
+    public List<Brokers> brokers;
+    public List<Dealers> dealers;
     public Currency defaultCurrency;
     private Web.Pages.Orgs.OrgsListModal OrgsShow { get; set; }
    
@@ -395,6 +441,9 @@
         currencies = await currencyService.ListAllAsync();
         // currencies = (List<Currency>)currencies.OrderBy(c => c.Iorder);
         defaultCurrency = await currencyService.GetByIdAsync("RUB");
+        books = await booksService.ListAllAsync();
+        brokers = await brokersService.ListAllAsync();
+        dealers = await dealersService.ListAllAsync();
     }
 
     public async Task Open()

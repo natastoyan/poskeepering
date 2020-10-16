@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Dealers
+    public partial class Dealers : BaseStrIdModel
     {
         public Dealers()
         {
@@ -14,7 +14,7 @@ namespace ApplicationCore.Models
             Swap = new HashSet<Swap>();
         }
 
-        public string Cdealercode { get; set; }
+       // public string Cdealercode { get; set; }
         public string Cdealername { get; set; }
         public decimal? Ilogverify { get; set; }
         public decimal? Nloguserkey { get; set; }

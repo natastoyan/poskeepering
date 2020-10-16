@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
-using Web.Data;
 using Infrastructure.Data.Repository;
 using Infrastructure.Data;
 using ApplicationCore.Services;
@@ -45,6 +44,12 @@ namespace Web
 			services.AddScoped<ICurrencyService, CurrencyService>();
 			services.AddScoped<IOrgsRepository, OrgsRepository>();
 			services.AddScoped<IOrgsService, OrgsService>();
+			services.AddScoped<IBooksRepository, BooksRepository>();
+			services.AddScoped<IBooksService, BooksService>();
+			services.AddScoped<IBrokersRepository, BrokersRepository>();
+			services.AddScoped<IBrokersService, BrokersService>();
+			services.AddScoped<IDealersRepository, DealersRepository>();
+			services.AddScoped<IDealersService, DealersService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

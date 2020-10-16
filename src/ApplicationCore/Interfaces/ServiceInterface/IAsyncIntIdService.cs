@@ -1,14 +1,13 @@
 ﻿using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-	public interface ICurrencyService
+	public interface IAsyncIntIdService<T> where T: BaseIntIdModel
 	{
-		public Task<List<Currency>> ListAllAsync();
-		public Task<Currency> GetByIdAsync(string id);
+		public Task<List<T>> ListAllAsync();
+		public Task<T> GetByIdAsync(decimal id);
 	}
 }

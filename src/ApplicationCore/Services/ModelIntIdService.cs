@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Interfaces;
 using ApplicationCore.Models;
+using Ardalis.Specification;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,11 @@ namespace ApplicationCore.Services
 		{
 			var list = await _repository.ListAllAsync();
 			return (List<T>)list;
+		}
+
+		Task<List<T>> IAsyncIntIdService<T>.ListAsync(ISpecification<T> spec)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

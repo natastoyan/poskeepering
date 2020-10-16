@@ -50,6 +50,8 @@ namespace Web
 			services.AddScoped<IBrokersService, BrokersService>();
 			services.AddScoped<IDealersRepository, DealersRepository>();
 			services.AddScoped<IDealersService, DealersService>();
+			services.AddScoped<IVtmcodesRepository, VtmcodesRepository>();
+			services.AddScoped<IVtmcodesService, VtmcodesService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

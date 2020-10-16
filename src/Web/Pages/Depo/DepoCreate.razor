@@ -4,6 +4,7 @@
 @inject ApplicationCore.Interfaces.IBooksService booksService 
 @inject ApplicationCore.Interfaces.IBrokersService brokersService
 @inject ApplicationCore.Interfaces.IDealersService dealersService
+@inject ApplicationCore.Interfaces.IVtmcodesService vtmcodeService;
 @namespace Web.Pages.DepoList
 
 <Web.Pages.Orgs.OrgsListModal @ref="@OrgsShow"></Web.Pages.Orgs.OrgsListModal>
@@ -330,12 +331,22 @@
         <div class="col">
             <!--Sales Person-->
             <div class="form-group row m-2">
-                <label for="salesperson" class="control-label col-sm-5">Sales Person</label>
+                <label for="vtmCodes" class="control-label col-sm-5">Sales Person</label>
                 <div class="col-sm-7">
-                    <input id="salesperson" name="salesperson" type="text" class="form-control" />
+                    <div class="input-group">
+                        <select class="custom-select" id="vtmCodes">
+                            @if (salesPersons != null)
+                            {
+                                @foreach (var salesPerson in salesPersons)
+                                {
+                                    <option value="@salesPerson.Id">@salesPerson.Cname</option>
+                                }
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
-
+         
             <div class="col-sm-7">
                 <!--Netting-->
                 <div class="custom-control custom-checkbox  custom-control-inline">
@@ -430,6 +441,8 @@
     public List<Books> books;
     public List<Brokers> brokers;
     public List<Dealers> dealers;
+    public List<VtmCodes> salesPersons;
+
     public Currency defaultCurrency;
     private Web.Pages.Orgs.OrgsListModal OrgsShow { get; set; }
    
@@ -444,6 +457,7 @@
         books = await booksService.ListAllAsync();
         brokers = await brokersService.ListAllAsync();
         dealers = await dealersService.ListAllAsync();
+        salesPersons = await vtmcodeService.ListSalesPersonAsync();
     }
 
     public async Task Open()

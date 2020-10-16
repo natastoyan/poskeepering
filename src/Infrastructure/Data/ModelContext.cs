@@ -46153,12 +46153,12 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<VtmCodes>(entity =>
             {
-                entity.HasKey(e => e.Ncodekey)
+                entity.HasKey(e => e.Id)
                     .HasName("SYS_C008991");
 
                 entity.ToTable("VTM_CODES");
 
-                entity.Property(e => e.Ncodekey)
+                entity.Property(e => e.Id)
                     .HasColumnName("NCODEKEY")
                     .HasColumnType("NUMBER");
 
@@ -46182,9 +46182,9 @@ namespace Infrastructure.Data
                     .HasColumnName("ISO")
                     .HasMaxLength(255);
 
-                entity.Property(e => e.Itype)
-                    .HasColumnName("ITYPE")
-                    .ValueGeneratedOnAdd();
+				entity.Property(e => e.Itype)
+					.HasColumnName("ITYPE");
+                   // .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
                     .HasColumnName("NAME")

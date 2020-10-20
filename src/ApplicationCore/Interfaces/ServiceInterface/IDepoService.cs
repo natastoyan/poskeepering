@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
+using System;
 using ApplicationCore.Models;
 
 using ApplicationCore.Interfaces;
@@ -13,6 +13,8 @@ namespace ApplicationCore.Interfaces
 	{
 		Task AddNewDepo(Depo newDepo);
 		Task<List<Depo>> ListAsync(ISpecification<Depo> spec);
+
+		Task<List<Depo>> ListAsyncFromDate(DateTime dateFrom);
 		Task<List<Depo>> ListLastYearAsync();      
 	}
 }

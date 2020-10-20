@@ -6,20 +6,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <h1 >Forex Deals</h1>
-            <RadzenGrid Style="width: 1640px" AllowFiltering="true"  AllowSorting="true"
+            <h1>Forex Deals</h1>
+            <RadzenLabel Text="Date from" Component="filterDateFrom" />
+            <RadzenDatePicker @bind-Value="lastYear" DateFormat="d" Name="filterDateFrom" Style="margin-bottom:20px" Change="@(args => ChangeFilterDateFrom(args))" />
+
+            <RadzenGrid Style="width: 1640px" AllowFiltering="true" AllowSorting="true" AllowPaging="true" PageSize="10"
                         Data="@forexList" TItem="Forex" ColumnWidth="180px">
                 <Columns>
                     <RadzenGridColumn TItem="Forex" Property="Nmurexoid" Title="Murex" />
                     <RadzenGridColumn TItem="Forex" Property="Id" Title="Deal Key" Width="120" />
                     <RadzenGridColumn TItem="Forex" Property="Cdealnumber" Title="Ref" />
                     <RadzenGridColumn TItem="Forex" Property="Cticket" Title="Ticket" Width="100" />
-                    <RadzenGridColumn TItem="Forex" Property="Dcontrdate" Title="Deal Date"  Width="150">
+                    <RadzenGridColumn TItem="Forex" Property="Dcontrdate" Title="Deal Date" Width="150">
                         <Template Context="data">
                             @String.Format("{0:d}", data.Dcontrdate)
                         </Template>
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Forex" Property="Dvaluedate" Title="Value Date"  Width="150">
+                    <RadzenGridColumn TItem="Forex" Property="Dvaluedate" Title="Value Date" Width="150">
                         <Template Context="data">
                             @String.Format("{0:d}", data.Dvaluedateb)
                         </Template>
@@ -36,38 +39,38 @@
 
 
             @*<table class="table table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Murex</th>
-                <th scope="col">Deal Key</th>
-                <th scope="col">Ref</th>
-                <th scope="col">Ticket</th>
-                <th scope="col">Deal Date</th>
-                <th scope="col">Value Date</th>
-                <th scope="col">Counterparty</th>
-                <th scope="col">SWAP</th>
-                <th scope="col">Buy</th>
-            <th scope="col">Bought Sum</th>
-        <th scope="col">Rate</th>
-         </tr>
-        </thead>
-        @foreach (var item in forexList)
-        {
-            <tbody>
+            <thead class="table-dark">
                 <tr>
-                    <td> @item.Nmurexoid </td>
-                    <td> @item.Id </td>
-                    <td> @item.Cdealnumber </td>
-                    <td> @item.Cticket</td>
-                    <td> @item.Dcontrdate</td>
-                    <td> @item.Dvaluedateb </td>
-                    <td> @item.Ccontrcode</td>
-                    <td> @item.Bswap</td>
-                    <td>@item.Nsumb</td>
-                </tr>
-            </tbody>
-        }
-    </table>*@
+                    <th scope="col">Murex</th>
+                    <th scope="col">Deal Key</th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Deal Date</th>
+                    <th scope="col">Value Date</th>
+                    <th scope="col">Counterparty</th>
+                    <th scope="col">SWAP</th>
+                    <th scope="col">Buy</th>
+                <th scope="col">Bought Sum</th>
+            <th scope="col">Rate</th>
+             </tr>
+            </thead>
+            @foreach (var item in forexList)
+            {
+                <tbody>
+                    <tr>
+                        <td> @item.Nmurexoid </td>
+                        <td> @item.Id </td>
+                        <td> @item.Cdealnumber </td>
+                        <td> @item.Cticket</td>
+                        <td> @item.Dcontrdate</td>
+                        <td> @item.Dvaluedateb </td>
+                        <td> @item.Ccontrcode</td>
+                        <td> @item.Bswap</td>
+                        <td>@item.Nsumb</td>
+                    </tr>
+                </tbody>
+            }
+        </table>*@
 
             <div class="row">
                 <div class="col">
@@ -83,9 +86,22 @@
 
 
     private List<ApplicationCore.Models.Forex> forexList;
+    DateTime lastYear = DateTime.Now.AddDays(-500);
 
     protected override async Task OnInitializedAsync()
     {
-        forexList = await forexService.ListLastYearAsync();
+
+        forexList = await forexService.ListAsyncFromDate(lastYear);
+
+    }
+
+
+    async void ChangeFilterDateFrom(DateTime? dateFrom)
+    {
+        if (dateFrom != null)
+        {
+            DateTime date = (DateTime)dateFrom;
+            forexList = await forexService.ListAsyncFromDate(date);
+        }
     }
 }

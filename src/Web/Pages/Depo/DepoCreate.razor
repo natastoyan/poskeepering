@@ -24,17 +24,21 @@
 
         <div class="col">
             <div class="form-group row m-2">
-                <label for="murexId" class="col-sm-4">Murex Id</label>
+                <div class="col-sm-4">
+                    <RadzenLabel Text="Murex Id"  Component="murexId" />
+                </div>
                 <div class="col-sm-8">
-                    <input id="murexId" type="text" name="murexId" class="form-control" />
+                    <RadzenTextBox  Name="murexId" />
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="form-group row m-2">
-                <label for="murexOrId" class="col-sm-4">Murex Original Id</label>
+                <div class="col-sm-4">
+                    <RadzenLabel Text="Murex Original Id"  Component="murexOrId" />
+                </div>
                 <div class="col-sm-8">
-                    <input id="murexOrId" name="murexOrId" type="text" class="form-control" />
+                    <RadzenTextBox Name="murexOrId" />
                 </div>
             </div>
         </div>
@@ -44,17 +48,22 @@
         <div class="col ">
             <!--Reference-->
             <div class="form-group row m-2">
-                <label for="reference" class="col-sm-5">Reference</label>
+                <div class="col-sm-5">
+                    <RadzenLabel Text="Reference" Component="reference" />
+                </div>
                 <div class="col-sm-7">
-                    <input id="reference" name="reference" type="text" class="form-control" />
+                    <RadzenTextBox  Name="reference" />
                 </div>
             </div>
 
             <!--Deal Ticket-->
             <div class="form-group row m-2">
-                <label for="dealTicket" class="col-sm-5">Deal Ticket</label>
+                <div class="col-sm-5">
+                    <RadzenLabel Text="Deal Ticket" Component="dealTicket" />
+                </div>
+    
                 <div class="col-sm-7">
-                    <input id="dealTicket" name="dealTicket" type="text" class="form-control" />
+                    <RadzenTextBox  Name="dealTicket" />
                 </div>
             </div>
         </div>
@@ -63,14 +72,15 @@
             <div class="form-group row m-2">
                 <label for="regDate" class="col-sm-5">Reg. Date</label>
                 <div class="col-sm-7">
-                    <input id="regDate" type="date" name="regDate" class="form-control" disabled />
+                    <RadzenDatePicker @bind-Value="today" DateFormat="d" Disabled="true" Name="regDate" />
+                    
                 </div>
             </div>
             <!--Deal Date-->
             <div class="form-group row m-2">
                 <label for="dealDate" class="col-sm-5">Deal Date</label>
                 <div class="col-sm-7">
-                    <input id="dealDate" type="date" name="dealDate" class="form-control" />
+                    <RadzenDatePicker @bind-Value="today" DateFormat="d" Name="dealDate"/>
                 </div>
             </div>
         </div>
@@ -78,18 +88,15 @@
         <div class="col  border rounded">
             <!--Start Date-->
             <div class="form-group row m-2">
-                <label for="startDate" class="col-sm-5" disabled>Start Date</label>
+                <label for="startDate" class="col-sm-5">Start Date</label>
                 <div class="col-sm-7">
-                    <input id="startDate" type="date" name="startDate" class="form-control" />
+                    <RadzenDatePicker @bind-Value="today" DateFormat="d" Name="startDate" />
                 </div>
             </div>
             <!--On Call-->
             <div class="form-group row m-2">
                 <div class="col-sm-7">
-                    <div class="custom-control custom-checkbox">
-                        <label class="custom-control-label" for="oncall">On Call</label>
-                        <input type="checkbox" class="custom-control-input" id="oncall" name="oncall">
-                    </div>
+                    <RadzenCheckBox   TriState="false" TValue="bool" Name="oncall" /><RadzenLabel Text="On Call" Style="margin-left: 15px;" Component="oncall" />
                 </div>
             </div>
 
@@ -97,7 +104,7 @@
             <div class="form-group row m-2">
                 <label for="martDate" class="col-sm-5">Marturity Date</label>
                 <div class="col-sm-7">
-                    <input id="martDate" type="date" name="martDate" class="form-control" />
+                    <RadzenDatePicker @bind-Value="tomorrow" DateFormat="d" Name="dealDate" />
                 </div>
             </div>
         </div>
@@ -178,69 +185,62 @@
         <div class="col">
             <!--Take Give-->
             <div class="form-group row m-2">
+                <div class="col-sm-5">
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input modal-element" id="defaultInline1" name="inlineDefaultRadiosExample">
-                    <label class="custom-control-label" for="defaultInline1">Take</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input modal-element" id="defaultInline1" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline1">Take</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input modal-element" id="defaultInline2" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline2">Give</label>
+                    </div>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input modal-element" id="defaultInline2" name="inlineDefaultRadiosExample">
-                    <label class="custom-control-label" for="defaultInline2">Give</label>
-                </div>
-
                 <!--Currency-->
-
-                <div class="input-group  custom-control-inline" style="width:80px">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option value="@defaultCurrency.Id">@defaultCurrency.Id</option>
-                        @if (currencies != null)
-                        {
-                            @foreach (var currency in currencies)
-                            {
-                                <option value="@currency.Id">@currency.Id</option>
-
-                            }
-                        }
-
-                    </select>
-                </div>
-
-            </div>
-            <!--Base-->
-            <div class="form-group row m-2">
-                <label for="base" class="control-label col-sm-5">Base</label>
                 <div class="col-sm-7">
-                    <input id="base" name="base" type="text" class="form-control" />
+                    <RadzenDropDown AllowClear="true" TValue="string"
+                                    Data="@currencies" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    TextProperty="Id" ValueProperty="Id">
+                    </RadzenDropDown>
+                </div>
+
+                </div>
+                <!--Base-->
+                <div class="form-group row m-2">
+                    <label for="base" class="control-label col-sm-5">Base</label>
+                    <div class="col-sm-7">
+                        <RadzenTextBox Style="margin-bottom: 20px" Name="base" />
+                        @*<RadzenTextBox Style="margin-bottom: 20px" @oninput="@(args => Change(args.Value.ToString(), "TextBox with change on every input"))" />*@
+                    </div>
+                </div>
+                <!--Interest-->
+                <div class="form-group row m-2">
+                    <label for="interest" class="control-label  col-sm-5">Interest</label>
+                    <div class="col-sm-7">
+                        <RadzenTextBox Style="margin-bottom: 20px" Name="interest" />
+                    </div>
                 </div>
             </div>
-            <!--Interest-->
-            <div class="form-group row m-2">
-                <label for="interest" class="control-label  col-sm-5">Interest</label>
-                <div class="col-sm-7">
-                    <input id="interes" name="interest" type="text" class="form-control" />
-                </div>
-            </div>
-        </div>
         <div class="col">
             <!--Sum 1-->
             <div class="form-group row m-2">
                 <label for="sum1" class="control-label col-sm-5">Sum</label>
                 <div class="col-sm-7">
-                    <input id="sum1" name="sum1" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="sum1" />
                 </div>
             </div>
             <!--Rate-->
             <div class="form-group row m-2">
                 <label for="rate" class="control-label col-sm-5">Rate</label>
                 <div class="col-sm-7">
-                    <input id="rate" name="rate" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="rate" />
                 </div>
             </div>
             <!--Sum 2-->
             <div class="form-group row m-2">
                 <label for="sum2" class="control-label col-sm-5">Sum + Int</label>
                 <div class="col-sm-7">
-                    <input id="sum2" name="sum2" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="sum2" />
                 </div>
             </div>
         </div>
@@ -249,28 +249,28 @@
             <div class="form-group row m-2">
                 <label for="marketprice" class="control-label col-sm-5">Market Price</label>
                 <div class="col-sm-7">
-                    <input id="marketprice" name="marketprice" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="marketprice" />
                 </div>
             </div>
             <!--Rate w/o FXcom-->
             <div class="form-group row m-2">
                 <label for="ratewofxcom" class="control-label col-sm-5">Rate w/o FXcom</label>
                 <div class="col-sm-7">
-                    <input id="ratewofxcom" name="ratewofxcom" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="ratewofxcom" />
                 </div>
             </div>
             <!--Comment-->
             <div class="form-group row m-2">
                 <label for="comment" class="control-label col-sm-5">Comment</label>
                 <div class="col-sm-7">
-                    <input id="comment" name="comment" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="comment" />
                 </div>
             </div>
             <!--Sales Profit-->
             <div class="form-group row m-2">
                 <label for="salesProfit" class="control-label col-sm-5">Sales Profit</label>
                 <div class="col-sm-7">
-                    <input id="salesProfit" name="salesProfit" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="salesProfit" />
                 </div>
             </div>
 
@@ -280,19 +280,12 @@
         <div class="col">
             <!--Dealer-->
             <div class="form-group row m-2">
-                <label for="dealer" class="control-label col-sm-5">Dealer</label>
+                <label class="control-label col-sm-5">Dealer</label>
                 <div class="col-sm-7">
-                    <div class="input-group">
-                        <select class="custom-select" id="dealer">
-                            @if (dealers != null)
-                            {
-                                @foreach (var dealer in dealers)
-                                {
-                                    <option value="@dealer.Id">@dealer.Cdealername</option>
-                                }
-                            }
-                        </select>
-                    </div>
+                    <RadzenDropDown AllowClear="true" TValue="string"
+                                    Data="@dealers" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    TextProperty="Cdealername" ValueProperty="Id">
+                    </RadzenDropDown>
                 </div>
             </div>
 
@@ -300,53 +293,33 @@
             <div class="form-group row m-2">
                 <label for="pl" class="control-label col-sm-5">P&L(%)</label>
                 <div class="col-sm-7">
-                    <input id="pl" name="pl" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="pl" />
                 </div>
             </div>
             <!--Broker-->
             <div class="form-group row m-2">
-                <label for="broker" class="control-label col-sm-5">Broker</label>
+                <label class="control-label col-sm-5">Broker</label>
                 <div class="col-sm-7">
-                    <div class="input-group">
-                        <select class="custom-select" id="broker">
-                            @if (brokers != null)
-                            {
-                                @foreach (var broker in brokers)
-                                {
-                                    <option value="@broker.Id">@broker.Cname</option>
-
-                                }
-                            }
-                        </select>
-                    </div>
+                    <RadzenDropDown AllowClear="true" TValue="string"
+                                    Data="@brokers" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    TextProperty="Cname" ValueProperty="Id">
+                    </RadzenDropDown>
                 </div>
             </div>
-            @*<div class="form-group row m-2">
-            <label for="broker" class="control-label col-sm-5">Broker</label>
-            <div class="col-sm-7">
-                <input id="broker" name="broker" type="text" class="form-control" />
-            </div>
-        </div>*@
+   
         </div>
         <div class="col">
             <!--Sales Person-->
             <div class="form-group row m-2">
-                <label for="vtmCodes" class="control-label col-sm-5">Sales Person</label>
+                <label class="control-label col-sm-5">Sales Person</label>
                 <div class="col-sm-7">
-                    <div class="input-group">
-                        <select class="custom-select" id="vtmCodes">
-                            @if (salesPersons != null)
-                            {
-                                @foreach (var salesPerson in salesPersons)
-                                {
-                                    <option value="@salesPerson.Id">@salesPerson.Cname</option>
-                                }
-                            }
-                        </select>
-                    </div>
+                    <RadzenDropDown AllowClear="true" TValue="string"
+                                    Data="@salesPersons" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    TextProperty="Cname" ValueProperty="Id">
+                    </RadzenDropDown>
                 </div>
             </div>
-         
+
             <div class="col-sm-7">
                 <!--Netting-->
                 <div class="custom-control custom-checkbox  custom-control-inline">
@@ -369,43 +342,37 @@
             <div class="form-group row m-2">
                 <label for="tradingvenue" class="control-label col-sm-5">Trading Venue</label>
                 <div class="col-sm-7">
-                    <input id="tradingvenue" name="tradingvenue" type="text" class="form-control" />
+                    <RadzenTextBox Style="margin-bottom: 20px" Name="tradingvenue" />
                 </div>
             </div>
 
         </div>
         <div class="col">
             <!--Book-->
+
             <div class="form-group row m-2">
-                <label for="book" class="control-label col-sm-5">Book</label>
+                <label class="control-label col-sm-5">Sales Person</label>
                 <div class="col-sm-7">
-                    <div class="input-group">
-                        <select class="custom-select" id="book">
-                            @if (books != null)
-                            {
-                                @foreach (var book in books)
-                                {
-                                    <option value="@book.Id">@book.Id</option>
-                                }
-                            }
-                        </select>
-                    </div>
+                    <RadzenDropDown AllowClear="true" TValue="string"
+                                    Data="@books" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    TextProperty="Id" ValueProperty="Id">
+                    </RadzenDropDown>
                 </div>
             </div>
 
-                <div class="col-sm-7">
-                    <!--Collateral-->
-                    <div class="custom-control custom-checkbox  custom-control-inline">
-                        <label class="custom-control-label col-sm-5" for="collateral">Collateral</label>
-                        <input type="checkbox" class="custom-control-input" id="collateral" name="collateral">
-                    </div>
-                    <!--Keep RUB Paym.-->
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
-                        <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
-                    </div>
+            <div class="col-sm-7">
+                <!--Collateral-->
+                <div class="custom-control custom-checkbox  custom-control-inline">
+                    <label class="custom-control-label col-sm-5" for="collateral">Collateral</label>
+                    <input type="checkbox" class="custom-control-input" id="collateral" name="collateral">
+                </div>
+                <!--Keep RUB Paym.-->
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <label for="keeprubpaym" class="custom-control-label">Keep RUB Paym.</label>
+                    <input id="keeprubpaym" type="checkbox" class="custom-control-input" name="keeprubpaym" />
                 </div>
             </div>
+        </div>
         </div>
     <div class="row">
         <div class="col">
@@ -445,8 +412,18 @@
 
     public Currency defaultCurrency;
     private Web.Pages.Orgs.OrgsListModal OrgsShow { get; set; }
-   
+    object newCurCode;
 
+    DateTime? today = DateTime.Now;
+    DateTime? tomorrow = DateTime.Now.AddDays(1);
+
+
+
+
+    void ChangeCurrency(object newCurCode)
+    {
+        newDepo.Ccurrcode = (string)newCurCode;
+    }
 
     protected override async Task OnInitializedAsync()
     {

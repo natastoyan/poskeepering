@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ApplicationCore.Models;
 using Ardalis.Specification;
+using System;
 
 namespace ApplicationCore.Interfaces
 {
@@ -9,6 +10,7 @@ namespace ApplicationCore.Interfaces
 	{
 		Task AddNewForex(Forex newForex);
 		Task<List<Forex>> ListAsync(ISpecification<Forex> spec);
+		Task<List<Forex>> ListAsyncFromDate(DateTime dateFrom);
 		Task<List<Forex>> ListLastYearAsync();
 	}
 }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Currency\" />
+    <Folder Include="Pages\Dealers\" />
   </ItemGroup>
 
 </Project>

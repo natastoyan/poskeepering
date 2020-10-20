@@ -41,7 +41,7 @@ namespace ApplicationCore.Models
         }
 
         //public string Ccurrcode { get; set; }
-        public string Id { get; set; }
+       // public string Id { get; set; }
         public string Ccurrname { get; set; }
         public decimal? Iorder { get; set; }
         public decimal? Iocporder { get; set; }

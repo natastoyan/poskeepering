@@ -26,7 +26,12 @@ namespace ApplicationCore.Services
 			var depoList = (List<Depo>) await _depoRepository.ListAsync(spec);
 			return depoList;
 		}
-
+		public async Task<List<Depo>> ListAsyncFromDate(DateTime dateFrom)
+		{
+			DepoFromDealDateSpecification spec = new DepoFromDealDateSpecification(dateFrom);
+			var depoList = await _depoRepository.ListAsync(spec);
+			return (List<Depo>)depoList;
+		}
 		public async Task<List<Depo>> ListLastYearAsync()
 		{
 

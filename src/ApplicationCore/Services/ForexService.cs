@@ -27,6 +27,14 @@ namespace ApplicationCore.Services
 			return forexList;
 		}
 
+		public async Task<List<Forex>> ListAsyncFromDate(DateTime dateFrom)
+		{
+			ForexFromDealDateSpecification spec = new ForexFromDealDateSpecification(dateFrom);
+			var forexList = await _forexRepository.ListAsync(spec);
+			return (List<Forex>)forexList;
+
+		}
+
 		public async  Task<List<Forex>> ListLastYearAsync()
 		{
 			ForexFromDealDateSpecification spec = new ForexFromDealDateSpecification(new DateTime(2019, 1, 1));

@@ -1,0 +1,33 @@
+﻿@page "/dealers"
+@inject ApplicationCore.Interfaces.IDealersService dealersService
+@namespace Web.Pages.Dealers
+
+<h3>DealersList</h3>
+
+<RadzenGrid AllowFiltering="true" AllowSorting="true" Data="@dealers" TItem="Dealers" ColumnWidth="180px">
+    <Columns>
+        <RadzenGridColumn TItem="Dealers" Property="Id" Title="Dealer ID" />
+        <RadzenGridColumn TItem="Dealers" Property="Cdealername" Title="Dealer Name" />
+        <RadzenGridColumn TItem="Dealers" Property="Creutercode" Title="Reuters Code" />
+        <RadzenGridColumn TItem="Dealers" Property="Cmicexcode" Title="MOEX Code" />
+        <RadzenGridColumn TItem="Dealers" Property="Cquikid" Title="Quik Id" />
+        <RadzenGridColumn TItem="Dealers" Property="Cquikclientcode" Title="Quik Client Code" />
+        <RadzenGridColumn TItem="Dealers" Property="Cusername" Title="CEDS Id" />
+        <RadzenGridColumn TItem="Dealers" Property="Cnamerus" Title="Name in Russian" />
+        <RadzenGridColumn TItem="Dealers" Property="Cbbgid" Title="Bloomberg Login" />
+  
+    </Columns>
+</RadzenGrid>
+
+
+@code {
+    private List<Dealers> dealers;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        dealers = await dealersService.ListAllAsync();
+
+    }
+
+}

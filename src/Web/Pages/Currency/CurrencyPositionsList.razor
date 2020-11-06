@@ -1,0 +1,51 @@
+﻿@page "/CurrencyPositions"
+@using ApplicationCore.CustomModels
+@using ApplicationCore.Interfaces.ServiceInterface
+@inject ICurrencyPositionService CurrencyPositionService
+@inject IWaitIndicatorService WaitIndicatorService
+<h3>CurrencyPositionsList</h3>
+
+<TelerikDateRangePicker @bind-StartValue="@StartDate"
+                         @bind-EndValue="@EndDate"
+                         StartId="start-date" >
+</TelerikDateRangePicker>
+
+<FullHeight>
+    <WaitIndicator Height="100%">
+    <TelerikGrid Data="@currencyPositions" Pageable="false" Height="100%"
+                 OnStateInit="@((GridStateEventArgs<CurrencyPosition> args) => OnStateInitHandler(args))">
+        <GridColumns>
+            <GridColumn Field="@(nameof(CurrencyPosition.CurrencyCode))" Title="Currency" />
+            <GridColumn Field="@(nameof(CurrencyPosition.Account))" Title="Account" />
+            <GridColumn Field="@(nameof(CurrencyPosition.In))" Title="Incoming" />
+            <GridColumn Field="@(nameof(CurrencyPosition.Debit))" Title="Debet" />
+            <GridColumn Field="@(nameof(CurrencyPosition.Credit))" Title="Credit" />
+            <GridColumn Field="@(nameof(CurrencyPosition.Sum))" Title="Balance" />
+        </GridColumns>
+    </TelerikGrid>
+    </WaitIndicator>
+</FullHeight>
+
+@code {
+
+    public DateTime? StartDate { get; set; } = DateTime.Today;
+    public DateTime? EndDate { get; set; } = DateTime.Today;
+    IReadOnlyCollection<CurrencyPosition> currencyPositions;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        await WaitIndicatorService.RunOperation(async op =>
+        {
+            op.Message = "Загрузка данных...";
+            currencyPositions = await Task.Run(() => CurrencyPositionService.GetCurrencyPositions(DateTime.Today, DateTime.Today, 0));
+        });
+
+    }
+
+    private void OnStateInitHandler(GridStateEventArgs<CurrencyPosition> args)
+    {
+        //
+    }
+
+    }

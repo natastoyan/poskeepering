@@ -1,0 +1,54 @@
+﻿@implements IDisposable
+@inject IWaitIndicatorService WaitIndicatorService
+
+<div style="height: @HeightString;">
+    @if (_currentOperationStatus != null)
+    {
+    <div style="height: @HeightString;" class="d-flex justify-content-center align-items-center">
+        <div class="spinner-grow text-primary" role="status">
+        </div>
+        <div class="text-secondary small"> @Message</div>
+    </div>
+    }
+    <div style="height: @HeightString;" class="@ContentClass">
+        @ChildContent
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Height { get; set; }
+
+    [Parameter]
+    public string ContextKey { get; set; } = "";
+
+    private string HeightString => Height ?? "auto";
+
+
+    private IOperationStatus _currentOperationStatus;
+
+    private string ContentClass => _currentOperationStatus == null ? "" : "d-none";
+
+    private string Message => _currentOperationStatus?.Message ?? "";
+
+    private async Task HandleTaskProgressChangedEvent(IOperationStatus operationStatus)
+    {
+        _currentOperationStatus = operationStatus;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+        WaitIndicatorService.SubscribeToOperationStatusChanged(HandleTaskProgressChangedEvent, ContextKey);
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        WaitIndicatorService.UnsubscribeFromOperationStatusChanged(HandleTaskProgressChangedEvent, ContextKey);
+    }
+}

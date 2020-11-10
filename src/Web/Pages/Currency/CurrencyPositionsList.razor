@@ -1,51 +1,87 @@
 ﻿@page "/CurrencyPositions"
-@using ApplicationCore.CustomModels
-@using ApplicationCore.Interfaces.ServiceInterface
+
 @inject ICurrencyPositionService CurrencyPositionService
 @inject IWaitIndicatorService WaitIndicatorService
+@inject IAsyncRepository<Curracctypes> CurrAccTypesRepository
 <h3>CurrencyPositionsList</h3>
 
-<TelerikDateRangePicker @bind-StartValue="@StartDate"
-                         @bind-EndValue="@EndDate"
-                         StartId="start-date" >
-</TelerikDateRangePicker>
+<div class="row mb-2">
+    <div class="col-auto">
+        <TelerikDateRangePicker @bind-StartValue="@StartDate"
+                                 @bind-EndValue="@EndDate"
+                                 StartId="start-date">
+        </TelerikDateRangePicker>
+    </div>
+    <div class="col-auto">
+        <WaitIndicator ContextKey="wiCurrTypes">
+            <TelerikComboBox Data="@_curracctypes" @bind-Value="CurrAccType"
+                             ValueField="@(nameof(Curracctypes.Cacctypecode))" TextField="@(nameof(Curracctypes.Cacctypename))"
+                             ClearButton="false" Width="200px" PopupHeight="120px"/>
+        </WaitIndicator>
+    </div>
+    <div class="col-auto">
+        <TelerikButton Icon="check" OnClick="ApplyFilters"></TelerikButton>
+    </div>
+</div>
 
 <FullHeight>
-    <WaitIndicator Height="100%">
-    <TelerikGrid Data="@currencyPositions" Pageable="false" Height="100%"
-                 OnStateInit="@((GridStateEventArgs<CurrencyPosition> args) => OnStateInitHandler(args))">
-        <GridColumns>
-            <GridColumn Field="@(nameof(CurrencyPosition.CurrencyCode))" Title="Currency" />
-            <GridColumn Field="@(nameof(CurrencyPosition.Account))" Title="Account" />
-            <GridColumn Field="@(nameof(CurrencyPosition.In))" Title="Incoming" />
-            <GridColumn Field="@(nameof(CurrencyPosition.Debit))" Title="Debet" />
-            <GridColumn Field="@(nameof(CurrencyPosition.Credit))" Title="Credit" />
-            <GridColumn Field="@(nameof(CurrencyPosition.Sum))" Title="Balance" />
-        </GridColumns>
-    </TelerikGrid>
+    <WaitIndicator Height="50%" ContextKey="wiMain">
+        <TelerikGrid Data="@_currencyPositions" Pageable="false" Height="100%"
+                     OnStateInit="@((GridStateEventArgs<CurrencyPosition> args) => OnStateInitHandler(args))">
+            <GridColumns>
+                <GridColumn Field="@(nameof(CurrencyPosition.CurrencyCode))" Title="Currency"/>
+                <GridColumn Field="@(nameof(CurrencyPosition.Account))" Title="Account"/>
+                <GridColumn Field="@(nameof(CurrencyPosition.In))" Title="Incoming"/>
+                <GridColumn Field="@(nameof(CurrencyPosition.Debit))" Title="Debet"/>
+                <GridColumn Field="@(nameof(CurrencyPosition.Credit))" Title="Credit"/>
+                <GridColumn Field="@(nameof(CurrencyPosition.Sum))" Title="Balance"/>
+            </GridColumns>
+        </TelerikGrid>
     </WaitIndicator>
 </FullHeight>
 
 @code {
 
     public DateTime? StartDate { get; set; } = DateTime.Today;
-    public DateTime? EndDate { get; set; } = DateTime.Today;
-    IReadOnlyCollection<CurrencyPosition> currencyPositions;
+    private DateTime? _endDate;
+
+    public DateTime? EndDate
+    {
+        get => _endDate ?? StartDate;
+        set => _endDate = value;
+    }
+
+    public string CurrAccType { get; set; } = CurrAccTypeAll;
+
+    IReadOnlyCollection<Curracctypes> _curracctypes;
+    IReadOnlyCollection<CurrencyPosition> _currencyPositions;
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
+        _curracctypes = new List<Curracctypes> {new Curracctypes {Cacctypecode = CurrAccTypeAll, Cacctypename = "All Types"}};
         await WaitIndicatorService.RunOperation(async op =>
         {
-            op.Message = "Загрузка данных...";
-            currencyPositions = await Task.Run(() => CurrencyPositionService.GetCurrencyPositions(DateTime.Today, DateTime.Today, 0));
-        });
-
+            op.Message = "Загрузка типов...";
+            var currAccTypes = await Task.Run(() => CurrAccTypesRepository.ListAllAsync());
+            _curracctypes = new List<Curracctypes>(_curracctypes.Concat(currAccTypes));
+        }, "wiCurrTypes");
+        await ApplyFilters();
     }
 
     private void OnStateInitHandler(GridStateEventArgs<CurrencyPosition> args)
     {
-        //
+    //
     }
 
+    private async Task ApplyFilters()
+    {
+        await WaitIndicatorService.RunOperation(async op =>
+        {
+            op.Message = "Загрузка данных...";
+            _currencyPositions = await Task.Run(() => CurrencyPositionService.GetCurrencyPositions(StartDate.GetValueOrDefault(), EndDate.GetValueOrDefault(), 0));
+        }, "wiMain");
     }
+
+        private const string CurrAccTypeAll = "__ALL__";
+}

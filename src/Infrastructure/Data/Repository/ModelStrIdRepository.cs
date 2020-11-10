@@ -9,22 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data.Repository
 {
-	public class ModelStrIdRepository<T> : IAsyncStrIdRepository<T> where T : BaseStrIdModel
+	public class ModelStrIdRepository<T> : ModelAsyncRepository<T, string>, IAsyncStrIdRepository<T> where T : BaseStrIdModel
 	{
-		protected readonly ModelContext _dbContext;
-
-		public ModelStrIdRepository(ModelContext dbContext)
+		
+		public ModelStrIdRepository(ModelContext dbContext): base(dbContext)
 		{
-			_dbContext = dbContext;
+		
 		}
-		public async Task<IReadOnlyList<T>> ListAllAsync()
-		{
-			return await _dbContext.Set<T>().ToListAsync();
-		}
-		public virtual async Task<T> GetByIdAsync(string id)
-		{
-			return await _dbContext.Set<T>().FindAsync(id);
-		}
-
-	}
+    }
 }

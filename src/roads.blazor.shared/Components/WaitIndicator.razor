@@ -4,13 +4,13 @@
 <div style="height: @HeightString;">
     @if (_currentOperationStatus != null)
     {
-    <div style="height: @HeightString;" class="d-flex justify-content-center align-items-center">
+    <div style="height: @HeightStringInner;" class="d-flex justify-content-center align-items-center">
         <div class="spinner-grow text-primary" role="status">
         </div>
         <div class="text-secondary small"> @Message</div>
     </div>
     }
-    <div style="height: @HeightString;" class="@ContentClass">
+    <div style="height: @HeightStringInner;" class="@ContentClass">
         @ChildContent
     </div>
 </div>
@@ -27,6 +27,8 @@
     public string ContextKey { get; set; } = "";
 
     private string HeightString => Height ?? "auto";
+
+    private string HeightStringInner => HeightString == "auto" ? "auto" : "100%";
 
 
     private IOperationStatus _currentOperationStatus;

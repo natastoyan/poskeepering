@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Text;
 using System.Threading.Tasks;
 using ApplicationCore.CustomModels;
 using ApplicationCore.Interfaces.ServiceInterface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Oracle.ManagedDataAccess.Client;
 
-namespace Infrastructure.Data.Repository
+namespace Infrastructure.Data.Services
 {
     public class CurrencyPositionService : ICurrencyPositionService
     {

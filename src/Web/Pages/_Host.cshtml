@@ -8,15 +8,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web</title>
-    <base href="~/"/>
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <base href="~/" />
+    @* <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" /> *@
+    <link rel="stylesheet" asp-href-include="/lib/twitter-bootstrap/**/*.min.css" asp-href-exclude="**/*-reboot*,**/*-grid" />
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
-    <link href="css/site.css" rel="stylesheet"/>
-    
+    <link href="css/site.css" rel="stylesheet" />
+
     <!--For purchased version: <script src="_content/Telerik.UI.for.Blazor/js/telerik-blazor.js" defer></script> -->
     <!--For purchased version: <link rel="stylesheet" href="_content/Telerik.UI.for.Blazor/css/kendo-theme-default/all.css" />-->
     <script src="_content/Telerik.UI.for.Blazor.Trial/js/telerik-blazor.js" defer></script>

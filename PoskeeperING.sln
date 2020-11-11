@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{CCEAB83D-3F23-477C-986B-DD8418D48E58}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "roads.blazor.shared", "src\roads.blazor.shared\roads.blazor.shared.csproj", "{D86D88A1-F095-4060-A8F4-4E4F1880FB9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{CCEAB83D-3F23-477C-986B-DD8418D48E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCEAB83D-3F23-477C-986B-DD8418D48E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCEAB83D-3F23-477C-986B-DD8418D48E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86D88A1-F095-4060-A8F4-4E4F1880FB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86D88A1-F095-4060-A8F4-4E4F1880FB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86D88A1-F095-4060-A8F4-4E4F1880FB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86D88A1-F095-4060-A8F4-4E4F1880FB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{DC06845F-67C2-4E42-BC47-8DC16860621D} = {9673E3E2-8701-41AB-A06A-09D722165996}
 		{E8FF82F7-A82C-485F-94A7-107C4DCBFB76} = {9673E3E2-8701-41AB-A06A-09D722165996}
 		{CCEAB83D-3F23-477C-986B-DD8418D48E58} = {9673E3E2-8701-41AB-A06A-09D722165996}
+		{D86D88A1-F095-4060-A8F4-4E4F1880FB9C} = {52CBE49C-52A1-41C6-B6DE-ECE99A076D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B54A619-A46B-492C-BC13-BB4B1AC3A0D5}

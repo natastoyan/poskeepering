@@ -10,16 +10,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Radzen.Blazor" Version="2.15.9" />
+    <PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="2.15.0" />
     <PackageReference Include="Toolbelt.Blazor.HeadElement" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\roads.blazor.shared\roads.blazor.shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Currency\" />
     <Folder Include="Pages\Dealers\" />
     <Folder Include="Pages\Books\" />
     <Folder Include="Pages\NewFolder\" />

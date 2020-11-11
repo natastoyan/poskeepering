@@ -1,0 +1,32 @@
+﻿@using Microsoft.JSInterop
+@using roads.blazor.shared.DomProperties
+@inject IJSRuntime JsRuntime;
+@code {
+    private string _title = "";
+
+    [Parameter]
+    public string Title {
+        get => _title;
+        set {
+            if (_title != value)
+            {
+                _title = value;
+                InvokeAsync(() => SetTitle(Title));
+            }
+        }
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await SetTitle(Title);
+        }
+    }
+    
+    private async Task SetTitle(string title)
+    {
+        await DomPropertiesProvider.SetWindowTitle(JsRuntime, title);
+    }
+}

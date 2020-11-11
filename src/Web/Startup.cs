@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Interfaces;
+using ApplicationCore.Interfaces.ServiceInterface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,9 @@ using Toolbelt.Blazor.Extensions.DependencyInjection;
 using Infrastructure.Data.Repository;
 using Infrastructure.Data;
 using ApplicationCore.Services;
+using Infrastructure.Data.Services;
+using Microsoft.EntityFrameworkCore;
+using roads.blazor.shared.Components;
 
 namespace Web
 {
@@ -31,28 +35,25 @@ namespace Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<ModelContext>();
+            services.AddDbContext<CustomModelContext>(options => options.UseOracle(Configuration["ConnectionStrings:PoskeeperDb"]));
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
+            services.AddTelerikBlazor();
 			services.AddHeadElementHelper();
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(ModelGenericRepository<>));
 			services.AddScoped(typeof(IAsyncIntIdRepository<>), typeof(ModelIntIdRepository<>));
 			services.AddScoped(typeof(IAsyncStrIdRepository<>), typeof(ModelStrIdRepository<>));
-		    services.AddScoped<IForexRepository, ForexRepository>();
-			services.AddScoped<IForexService, ForexService>();
-			services.AddScoped<IDepoRepository, DepoRepository>();
+		    services.AddScoped<IForexService, ForexService>();
 			services.AddScoped<IDepoService, DepoService>();
-			services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 			services.AddScoped<ICurrencyService, CurrencyService>();
-			services.AddScoped<IOrgsRepository, OrgsRepository>();
 			services.AddScoped<IOrgsService, OrgsService>();
-			services.AddScoped<IBooksRepository, BooksRepository>();
 			services.AddScoped<IBooksService, BooksService>();
-			services.AddScoped<IBrokersRepository, BrokersRepository>();
 			services.AddScoped<IBrokersService, BrokersService>();
-			services.AddScoped<IDealersRepository, DealersRepository>();
 			services.AddScoped<IDealersService, DealersService>();
-			services.AddScoped<IVtmcodesRepository, VtmcodesRepository>();
 			services.AddScoped<IVtmcodesService, VtmcodesService>();
-		}
+            services.AddScoped<ICurrencyPositionService, CurrencyPositionService>();
+            services.AddSingleton<IWaitIndicatorService, WaitIndicatorService>();
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

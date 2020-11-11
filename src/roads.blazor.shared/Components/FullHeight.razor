@@ -1,0 +1,64 @@
+﻿@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@using Microsoft.JSInterop
+@using roads.blazor.shared.DomProperties
+@using Microsoft.AspNetCore.Components.Routing
+@using System.Globalization
+@implements IDisposable
+
+<div @ref="FullHeightContainer" style="height: @(Height.ToString(CultureInfo.InvariantCulture))px">
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    ElementReference FullHeightContainer { get; set; }
+
+    protected float Height { get; set; } = 0;
+
+    private WindowProperties _windowProperties;
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JsRuntime.InvokeVoidAsync("Roads.subscribeToWindowSizeChange", DotNetObjectReference.Create(this));
+            await SetFullHeight();
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
+
+    [JSInvokable("WindowSizeChanged")]
+    public async void WindowResized(WindowProperties windowProperties)
+    {
+        _windowProperties = windowProperties;
+        await SetFullHeight();
+    }
+
+    private async void LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        await SetFullHeight();
+    }
+
+    private async Task SetFullHeight()
+    {
+        var props = await DomPropertiesProvider.GetElementProperties(JsRuntime, FullHeightContainer);
+        if (props != null)
+        {
+            var newHeight = props.WindowProperties.WindowHeight - props.AbsoluteTop;
+            if (Math.Abs(Height - newHeight) > 0.01)
+            {
+                Height = props.WindowProperties.WindowHeight - props.AbsoluteTop;
+                StateHasChanged();
+            }
+
+        }
+    }
+}

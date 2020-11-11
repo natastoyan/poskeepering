@@ -21,6 +21,8 @@
   <ItemGroup>
     <Folder Include="Pages\Currency\" />
     <Folder Include="Pages\Dealers\" />
+    <Folder Include="Pages\Books\" />
+    <Folder Include="Pages\NewFolder\" />
   </ItemGroup>
 
 </Project>

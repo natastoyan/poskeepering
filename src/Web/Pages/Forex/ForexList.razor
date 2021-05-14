@@ -1,4 +1,5 @@
 ﻿@inject ApplicationCore.Interfaces.IForexService forexService;
+
 @page "/forex"
 
 @namespace Web.Pages.Forex
@@ -38,39 +39,6 @@
             </RadzenGrid>
 
 
-            @*<table class="table table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Murex</th>
-                    <th scope="col">Deal Key</th>
-                    <th scope="col">Ref</th>
-                    <th scope="col">Ticket</th>
-                    <th scope="col">Deal Date</th>
-                    <th scope="col">Value Date</th>
-                    <th scope="col">Counterparty</th>
-                    <th scope="col">SWAP</th>
-                    <th scope="col">Buy</th>
-                <th scope="col">Bought Sum</th>
-            <th scope="col">Rate</th>
-             </tr>
-            </thead>
-            @foreach (var item in forexList)
-            {
-                <tbody>
-                    <tr>
-                        <td> @item.Nmurexoid </td>
-                        <td> @item.Id </td>
-                        <td> @item.Cdealnumber </td>
-                        <td> @item.Cticket</td>
-                        <td> @item.Dcontrdate</td>
-                        <td> @item.Dvaluedateb </td>
-                        <td> @item.Ccontrcode</td>
-                        <td> @item.Bswap</td>
-                        <td>@item.Nsumb</td>
-                    </tr>
-                </tbody>
-            }
-        </table>*@
 
             <div class="row">
                 <div class="col">
